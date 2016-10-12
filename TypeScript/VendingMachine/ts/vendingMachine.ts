@@ -2,7 +2,7 @@ class VendingMachine {
   //  private paid: number = 0;
   private paid = ko.observable(0);
 
-  selectedCell = ko.observable(new Cell(new CocaCola()))
+  selectedCell = ko.observable(new Cell(new Initial()))
 
 // Comuted when any if the observables are updated
   canPay = ko.pureComputed(() => this.paid() -
@@ -51,23 +51,22 @@ class VendingMachine {
    Arrow function - 'this' aways refers to the class in which the method lies.
    Same as Java
   */
-  public acceptedCoins: Quarter[] = [new Quarter()]
-  acceptCoin = (coin: Quarter): void => {
+  public acceptedCoins: Coin[] = [new Quarter(), new Dime(), new Half(), new Dollar()]
+  acceptCoin = (coin: Coin): void => {
     //  this.paid = this.paid + coin.Value;
     //  var element = document.getElementById("total");
     //  element.innerHTML = this.paid.toString();
 
     // Replacing with knockout. Get value by calling as a method
     let oldTotal = this.paid();
-    this.paid(oldTotal + coin.Value);
-
+    this.paid(oldTotal + coin.value);
   }
 
 }
 
 // Public creates a class level property for the passed value
 class Cell {
-  constructor (public product: CocaCola) {
+  constructor (public product: Product) {
 
   }
   stock = ko.observable(3);

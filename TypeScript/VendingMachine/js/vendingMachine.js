@@ -2,7 +2,7 @@ var VendingMachine = (function () {
     function VendingMachine() {
         var _this = this;
         this.paid = ko.observable(0);
-        this.selectedCell = ko.observable(new Cell(new CocaCola()));
+        this.selectedCell = ko.observable(new Cell(new Initial()));
         this.canPay = ko.pureComputed(function () { return _this.paid() -
             _this.selectedCell().product.price >= 0; });
         this.pay = function () {
@@ -21,10 +21,10 @@ var VendingMachine = (function () {
             cell.sold(false);
             _this.selectedCell(cell);
         };
-        this.acceptedCoins = [new Quarter()];
+        this.acceptedCoins = [new Quarter(), new Dime(), new Half(), new Dollar()];
         this.acceptCoin = function (coin) {
             var oldTotal = _this.paid();
-            _this.paid(oldTotal + coin.Value);
+            _this.paid(oldTotal + coin.value);
         };
     }
     Object.defineProperty(VendingMachine.prototype, "size", {
