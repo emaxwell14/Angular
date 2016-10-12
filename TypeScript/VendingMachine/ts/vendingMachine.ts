@@ -1,8 +1,32 @@
-class VendingMachine {
+// Require.js
+import * as Coins from "./coin";
+// Select which files to import. Can be used directly
+import {Product, Initial as Init} from "./products";
+// Getting default from a file
+import getVendingProduct from "./productFactory";
+
+export enum VendingMachineSize {
+  small = 6,
+  medium = 9,
+  large = 12
+}
+
+
+// Public creates a class level property for the passed value
+// Not exported as only used locally
+class Cell {
+  constructor (public product: Product) {
+
+  }
+  stock = ko.observable(3);
+  sold = ko.observable(false);
+}
+
+export class VendingMachine {
   //  private paid: number = 0;
   private paid = ko.observable(0);
 
-  selectedCell = ko.observable(new Cell(new Initial()))
+  selectedCell = ko.observable(new Cell(new Init()))
 
 // Comuted when any if the observables are updated
   canPay = ko.pureComputed(() => this.paid() -
@@ -28,7 +52,7 @@ class VendingMachine {
     this.cells([]);
 
     for(let index=0; index < givenSize; index++) {
-      let product = productFactory.GetProduct();
+      let product = getVendingProduct();
       this.cells.push(new Cell(product));
     }
   }
@@ -51,8 +75,9 @@ class VendingMachine {
    Arrow function - 'this' aways refers to the class in which the method lies.
    Same as Java
   */
-  public acceptedCoins: Coin[] = [new Quarter(), new Dime(), new Half(), new Dollar()]
-  acceptCoin = (coin: Coin): void => {
+  public acceptedCoins: Coins.Coin[] = [new Coins.Quarter(), new Coins.Dime(),
+     new Coins.Half(), new Coins.Dollar()]
+  acceptCoin = (coin: Coins.Coin): void => {
     //  this.paid = this.paid + coin.Value;
     //  var element = document.getElementById("total");
     //  element.innerHTML = this.paid.toString();
@@ -62,24 +87,4 @@ class VendingMachine {
     this.paid(oldTotal + coin.value);
   }
 
-}
-
-// Public creates a class level property for the passed value
-class Cell {
-  constructor (public product: Product) {
-
-  }
-  stock = ko.observable(3);
-  sold = ko.observable(false);
-}
-
-/*
-Only allow certain sizes
-Easier to replace
-More readable
-*/
-enum VendingMachineSize {
-  small = 6,
-  medium = 9,
-  large = 12
 }

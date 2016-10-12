@@ -40,3 +40,7 @@ class CandyBarCategory extends ProductCategory {
         return this.imgPath + "CandyBar.png";
     }
 }
+
+// Require.js
+export {CandyBarCategory as BarCategory, CandyCategory, ChipsCategory,
+  NutsCategory, SodaCategory, ProductCategory}

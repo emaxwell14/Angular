@@ -1,4 +1,5 @@
 
+
 abstract class Coin {
 //  value: number;
 // Accessor creates the value
@@ -50,3 +51,6 @@ class Dollar extends Coin {
     return "img/Dollar.jpg";
   }
 }
+
+// Require.js
+export {Coin, Dime, Quarter, Half, Dollar}

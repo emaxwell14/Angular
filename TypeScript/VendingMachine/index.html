@@ -56,12 +56,16 @@
     </div>
 
     <script type="text/javascript" src="js/lib/knockout-3.4.0.js"></script>
-    <script type="text/javascript" src="js/coin.js"></script>
-    <script type="text/javascript" src="js/productCategory.js"></script>
-    <script type="text/javascript" src="js/products.js"></script>s
-    <script type="text/javascript" src="js/productFactory.js"></script>
-    <script type="text/javascript" src="js/vendingMachine.js"></script>
-    <script type="text/javascript" src="js/bootstrapper.js"></script>
+    <script type="text/javascript" src="js/lib/require.js"></script>
 
+    <script type="text/javascript">
+    // Get js file and callback function
+      require(["js/vendingMachine"], function(machineModule) {
+        // Code that was initially in bootstrapper js file
+        var machine = new machineModule.VendingMachine();
+        machine.size = machineModule.VendingMachineSize.medium;
+        ko.applyBindings(machine);
+      });
+    </script>
   </body>
 </html>

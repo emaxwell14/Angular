@@ -16,7 +16,8 @@
         "suppressImplicitAnyIndexErrors": true,
         "outDir": "js",
         "rootDir": "ts",
-        "sourceMap": true
+        "sourceMap": true,
+        "module": "amd"
     },
     "exclude": [
         "node_modules",
