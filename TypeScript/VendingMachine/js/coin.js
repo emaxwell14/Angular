@@ -16,7 +16,7 @@ define(["require", "exports"], function (require, exports) {
     var Quarter = (function (_super) {
         __extends(Quarter, _super);
         function Quarter() {
-            _super.call(this, .25);
+            return _super.call(this, .25) || this;
         }
         Quarter.prototype.getImageUrl = function () {
             return "./img/Quarter.png";
@@ -27,7 +27,7 @@ define(["require", "exports"], function (require, exports) {
     var Dime = (function (_super) {
         __extends(Dime, _super);
         function Dime() {
-            _super.call(this, .1);
+            return _super.call(this, .1) || this;
         }
         Dime.prototype.getImageUrl = function () {
             return "img/Dime.png";
@@ -38,7 +38,7 @@ define(["require", "exports"], function (require, exports) {
     var Half = (function (_super) {
         __extends(Half, _super);
         function Half() {
-            _super.call(this, .5);
+            return _super.call(this, .5) || this;
         }
         Half.prototype.getImageUrl = function () {
             return "img/Half.png";
@@ -49,7 +49,7 @@ define(["require", "exports"], function (require, exports) {
     var Dollar = (function (_super) {
         __extends(Dollar, _super);
         function Dollar() {
-            _super.call(this, 1);
+            return _super.call(this, 1) || this;
         }
         Dollar.prototype.getImageUrl = function () {
             return "img/Dollar.jpg";
