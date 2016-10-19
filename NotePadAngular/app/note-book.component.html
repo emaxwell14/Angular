@@ -1,0 +1,20 @@
+<div class="container-fluid">
+
+<!-- Header Menu -->
+<div class="row col-md-12">
+</div>
+
+<!-- Note List sidebar -->
+<div class="row col-md-2">
+  <note-list
+  [(selected)] = "selectedNote"
+  [notes] = "notes"
+  ></note-list>
+</div>
+
+<!-- Note Edit field -->
+<div class="row col-md-10">
+  <note-tab [(note)] = "selectedNote"></note-tab>
+</div>
+
+</div>

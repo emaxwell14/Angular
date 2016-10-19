@@ -1,0 +1,8 @@
+
+<ul class="list-group">
+  <a href="#" class="list-group-item" *ngFor="let note of notes"
+  (click)="onSelect(note)">
+   <h4 class="list-group-item-heading">{{note.name}}</h4>
+   <p class="list-group-item-text">{{note.body}}</p>
+  </a>
+</ul>
