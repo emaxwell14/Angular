@@ -51,4 +51,5 @@ export class HeroesComponent implements OnInit {
         if (this.selectedHero === hero) { this.selectedHero = null; }
       });
 
+  }
 }
