@@ -9,29 +9,31 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var note_1 = require('./note');
+var note_service_1 = require('./note.service');
 var NoteTabComponent = (function () {
-    function NoteTabComponent() {
-        this.noteChange = new core_1.EventEmitter();
+    function NoteTabComponent(noteService) {
+        this.noteService = noteService;
     }
-    NoteTabComponent.prototype.onChange = function (note) {
-        this.noteChange.emit(note);
+    NoteTabComponent.prototype.onEdit = function (note) {
+        // Call edit method in service
     };
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', note_1.Note)
-    ], NoteTabComponent.prototype, "note", void 0);
-    __decorate([
-        core_1.Output(), 
-        __metadata('design:type', core_1.EventEmitter)
-    ], NoteTabComponent.prototype, "noteChange", void 0);
+    NoteTabComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.subscription = this.noteService.noteChange.subscribe(function (item) { return _this.selectedNote(item); });
+    };
+    NoteTabComponent.prototype.selectedNote = function (note) {
+        this.note = note;
+    };
+    NoteTabComponent.prototype.ngOnDestroy = function () {
+        this.subscription.unsubscribe();
+    };
     NoteTabComponent = __decorate([
         core_1.Component({
             moduleId: module.id,
             selector: 'note-tab',
-            templateUrl: 'note-tab.component.html'
+            templateUrl: 'note-tab.component.html',
         }), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [note_service_1.NoteService])
     ], NoteTabComponent);
     return NoteTabComponent;
 }());

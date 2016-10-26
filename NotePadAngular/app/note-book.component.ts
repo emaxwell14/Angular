@@ -10,14 +10,7 @@ import {NoteService} from './note.service'
   templateUrl: 'note-book.component.html'
 })
 export class NoteBookComponent implements OnInit{
-  notes: Note[];
-  selectedNote: Note;
-
-  constructor(private noteService: NoteService){
+  constructor(){
   }
-
-  ngOnInit(): void {
-    this.notes = this.noteService.getNotes();
-  }
-
+  ngOnInit(): void {}
 }

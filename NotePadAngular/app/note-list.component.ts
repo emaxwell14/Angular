@@ -9,13 +9,24 @@ import {NoteService} from './note.service'
   selector: 'note-list',
   templateUrl: 'note-list.component.html'
 })
-export class NoteListComponent{
-@Input() notes: Note[];
-@Input() selected: Note;
-@Output() selectedChange: EventEmitter<Note> = new EventEmitter<Note>();
+export class NoteListComponent {
+notes: Note[];
+selected: Note;
+subscription: any;
 
   onSelect(note: Note): void {
-    this.selectedChange.emit(note);
+    this.noteService.changeNote(note);
   }
+
+  constructor(private noteService: NoteService) {
+  }
+
+  ngOnInit() {
+    this.selected = this.noteService.getSelectedNote();
+    this.notes = this.noteService.getNotes();
+    this.subscription = this.noteService.noteListChange.subscribe(
+      item => this.notes = item);
+  }
+
 
 }

@@ -9,21 +9,17 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var note_service_1 = require('./note.service');
 var NoteBookComponent = (function () {
-    function NoteBookComponent(noteService) {
-        this.noteService = noteService;
+    function NoteBookComponent() {
     }
-    NoteBookComponent.prototype.ngOnInit = function () {
-        this.notes = this.noteService.getNotes();
-    };
+    NoteBookComponent.prototype.ngOnInit = function () { };
     NoteBookComponent = __decorate([
         core_1.Component({
             moduleId: module.id,
             selector: 'note-book',
             templateUrl: 'note-book.component.html'
         }), 
-        __metadata('design:paramtypes', [note_service_1.NoteService])
+        __metadata('design:paramtypes', [])
     ], NoteBookComponent);
     return NoteBookComponent;
 }());
