@@ -10,21 +10,32 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var note_service_1 = require('./note.service');
+/**
+* Component for editing a note. It has twoway binding on the note name and body.
+* It is subscribed to the selected note event.
+*/
 var NoteTabComponent = (function () {
     function NoteTabComponent(noteService) {
         this.noteService = noteService;
     }
+    /**
+    * Subscribes to the note change event in the noteService. Clear the
+    * edit title boolean.
+    */
     NoteTabComponent.prototype.ngOnInit = function () {
         var _this = this;
-        this.subscription = this.noteService.noteChange.subscribe(function (item) { return _this.selectedNote(item); });
+        // TODO better way to get default
+        this.note = this.noteService.getNotes()[0];
+        this.subscription = this.noteService.noteChange.subscribe(function (item) { return _this.note = item; });
         this.titleEdit = false;
-    };
-    NoteTabComponent.prototype.selectedNote = function (note) {
-        this.note = note;
     };
     NoteTabComponent.prototype.ngOnDestroy = function () {
         this.subscription.unsubscribe();
     };
+    /**
+    * Called when the title is clicked. The boolean shows and hides the text area
+    * for editing
+    */
     NoteTabComponent.prototype.toggleTitleEdit = function () {
         this.titleEdit = !this.titleEdit;
     };

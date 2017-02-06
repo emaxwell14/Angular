@@ -10,18 +10,29 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var note_service_1 = require('./note.service');
+/**
+* Class for the list of notes.
+* For each note a list element is created with its name and details. When
+* clicked the current note is updated in the Note
+*/
 var NoteListComponent = (function () {
+    /**
+    * Constructor creates the NoteService
+    */
     function NoteListComponent(noteService) {
         this.noteService = noteService;
     }
+    /**
+    * Calls the service to update the selected note
+    */
     NoteListComponent.prototype.onSelect = function (note) {
         this.noteService.changeSelectedNote(note);
     };
+    /**
+    * Get the list of notes from the service
+    */
     NoteListComponent.prototype.ngOnInit = function () {
-        var _this = this;
-        this.selected = this.noteService.getSelectedNote();
         this.notes = this.noteService.getNotes();
-        this.selectedSubscription = this.noteService.noteChange.subscribe(function (item) { return _this.selected = item; });
     };
     NoteListComponent = __decorate([
         core_1.Component({

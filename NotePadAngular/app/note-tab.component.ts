@@ -3,33 +3,45 @@ import { Component, Input, Output, EventEmitter} from '@angular/core';
 import { Note } from './note';
 import { NoteService } from './note.service';
 
+/**
+* Component for editing a note. It has twoway binding on the note name and body.
+* It is subscribed to the selected note event.
+*/
 @Component({
   moduleId: module.id,
   selector: 'note-tab',
   templateUrl: 'note-tab.component.html',
 })
 export class NoteTabComponent {
-   note:Note
+   note: Note
    subscription: any
    titleEdit: boolean
 
-   constructor (private noteService: NoteService) {}
-
-   ngOnInit() {
-     this.subscription = this.noteService.noteChange.subscribe(
-       item => this.selectedNote(item));
-       this.titleEdit = false;
+   constructor (private noteService: NoteService) {
    }
 
-   selectedNote(note: Note) {
-    this.note = note;
-  }
+   /**
+   * Subscribes to the note change event in the noteService. Clear the
+   * edit title boolean.
+   */
+   ngOnInit() {
+     // TODO better way to get default
+     this.note = this.noteService.getNotes()[0];
+
+     this.subscription = this.noteService.noteChange.subscribe(
+     item => this.note = item);
+     this.titleEdit = false;
+   }
 
    ngOnDestroy() {
-    this.subscription.unsubscribe();
-  }
+     this.subscription.unsubscribe();
+   }
 
-  toggleTitleEdit() {
-    this.titleEdit = !this.titleEdit;
-  }
+   /**
+   * Called when the title is clicked. The boolean shows and hides the text area
+   * for editing
+   */
+   toggleTitleEdit() {
+     this.titleEdit = !this.titleEdit;
+   }
 }

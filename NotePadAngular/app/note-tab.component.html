@@ -1,8 +1,12 @@
 <div *ngIf="note">
   <div *ngIf="titleEdit">
-    <textarea rows="1"
-      [(ngModel)]="note.name"></textarea>
-    <button (click)="toggleTitleEdit()">Click me!</button>
+    <input type="text"
+      [(ngModel)]="note.name"/>
+    <button type="button"
+      class="btn btn-success"
+      (click)="toggleTitleEdit()">
+      <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+   </button>
   </div>
   <div *ngIf="!titleEdit">
     <h2 class="alert-heading"

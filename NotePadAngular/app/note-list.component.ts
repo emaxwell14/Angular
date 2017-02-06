@@ -4,6 +4,11 @@ import {Note} from './note'
 import {NoteTabComponent} from './note-tab.component'
 import {NoteService} from './note.service'
 
+/**
+* Class for the list of notes.
+* For each note a list element is created with its name and details. When
+* clicked the current note is updated in the Note
+*/
 @Component({
   moduleId: module.id,
   selector: 'note-list',
@@ -12,21 +17,24 @@ import {NoteService} from './note.service'
 export class NoteListComponent {
   notes: Note[];
 
-  selected: Note;
-  selectedSubscription: any
+  /**
+  * Constructor creates the NoteService
+  */
+  constructor(private noteService: NoteService) {
+  }
 
+  /**
+  * Calls the service to update the selected note
+  */
   onSelect(note: Note): void {
     this.noteService.changeSelectedNote(note);
   }
 
-  constructor(private noteService: NoteService) {
-  }
-
+  /**
+  * Get the list of notes from the service
+  */
   ngOnInit() {
-    this.selected = this.noteService.getSelectedNote();
     this.notes = this.noteService.getNotes();
-    this.selectedSubscription = this.noteService.noteChange.subscribe(
-      item => this.selected = item);
   }
 
 }
