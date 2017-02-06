@@ -11,23 +11,19 @@ exports.NOTES = [
 var NoteService = (function () {
     function NoteService() {
         var _this = this;
+        // share() allows multiple subscribers
         this.noteChange = new Observable_1.Observable(function (observer) {
             return _this.observer = observer;
-        }).share();
-        // share() allows multiple subscribers
-        this.noteListChange = new Observable_1.Observable(function (observer) {
-            return _this.observerNotes = observer;
         }).share();
     }
     NoteService.prototype.ngOnInit = function () {
         this.selectedNote = exports.NOTES[0];
-        this.changeNote(exports.NOTES[0]);
-        this.observerNotes.next(exports.NOTES);
+        this.changeSelectedNote(exports.NOTES[0]);
     };
     NoteService.prototype.getNotes = function () {
         return exports.NOTES;
     };
-    NoteService.prototype.changeNote = function (number) {
+    NoteService.prototype.changeSelectedNote = function (number) {
         this.selectedNote = number;
         this.observer.next(number);
     };

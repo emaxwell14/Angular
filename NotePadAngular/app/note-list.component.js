@@ -15,13 +15,13 @@ var NoteListComponent = (function () {
         this.noteService = noteService;
     }
     NoteListComponent.prototype.onSelect = function (note) {
-        this.noteService.changeNote(note);
+        this.noteService.changeSelectedNote(note);
     };
     NoteListComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.selected = this.noteService.getSelectedNote();
         this.notes = this.noteService.getNotes();
-        this.subscription = this.noteService.noteListChange.subscribe(function (item) { return _this.notes = item; });
+        this.selectedSubscription = this.noteService.noteChange.subscribe(function (item) { return _this.selected = item; });
     };
     NoteListComponent = __decorate([
         core_1.Component({

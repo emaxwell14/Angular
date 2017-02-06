@@ -6,10 +6,11 @@ import {NoteListComponent} from './note-list.component';
 import {NoteTabComponent} from './note-tab.component';
 import {NoteBookComponent} from './note-book.component';
 import {NoteService} from './note.service';
+import { FormsModule }   from '@angular/forms';
 
 
 @NgModule({
-  imports: [BrowserModule],
+  imports: [BrowserModule, FormsModule],
   declarations: [AppComponent, NoteListComponent, NoteTabComponent,
   NoteBookComponent],
   bootstrap: [AppComponent],

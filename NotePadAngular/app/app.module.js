@@ -15,12 +15,13 @@ var note_list_component_1 = require('./note-list.component');
 var note_tab_component_1 = require('./note-tab.component');
 var note_book_component_1 = require('./note-book.component');
 var note_service_1 = require('./note.service');
+var forms_1 = require('@angular/forms');
 var AppModule = (function () {
     function AppModule() {
     }
     AppModule = __decorate([
         core_1.NgModule({
-            imports: [platform_browser_1.BrowserModule],
+            imports: [platform_browser_1.BrowserModule, forms_1.FormsModule],
             declarations: [app_component_1.AppComponent, note_list_component_1.NoteListComponent, note_tab_component_1.NoteTabComponent,
                 note_book_component_1.NoteBookComponent],
             bootstrap: [app_component_1.AppComponent],

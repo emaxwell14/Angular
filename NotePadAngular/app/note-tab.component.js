@@ -14,18 +14,19 @@ var NoteTabComponent = (function () {
     function NoteTabComponent(noteService) {
         this.noteService = noteService;
     }
-    NoteTabComponent.prototype.onEdit = function (note) {
-        // Call edit method in service
-    };
     NoteTabComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.subscription = this.noteService.noteChange.subscribe(function (item) { return _this.selectedNote(item); });
+        this.titleEdit = false;
     };
     NoteTabComponent.prototype.selectedNote = function (note) {
         this.note = note;
     };
     NoteTabComponent.prototype.ngOnDestroy = function () {
         this.subscription.unsubscribe();
+    };
+    NoteTabComponent.prototype.toggleTitleEdit = function () {
+        this.titleEdit = !this.titleEdit;
     };
     NoteTabComponent = __decorate([
         core_1.Component({

@@ -1,7 +1,15 @@
 <div *ngIf="note">
-  <h2 class="alert-heading">{{note.name}}</h2>
-  <textarea class="form-control" rows="20">{{note.body}}</textarea>
-  <p>
+  <div *ngIf="titleEdit">
+    <textarea rows="1"
+      [(ngModel)]="note.name"></textarea>
+    <button (click)="toggleTitleEdit()">Click me!</button>
+  </div>
+  <div *ngIf="!titleEdit">
+    <h2 class="alert-heading"
+    (click)="toggleTitleEdit()">{{note.name}}</h2>
+  </div>
 
-  </p>
+  <textarea class="form-control" rows="20"
+    [(ngModel)]="note.body"
+    ></textarea>
 </div>

@@ -24,25 +24,15 @@ export class NoteService implements OnInit{
   // Represents the class receiving
   private observer: Observer<Note>;
 
-  // TODO implement change method
-  noteListChange: Observable<Note[]>;
-  private observerNotes: Observer<Note[]>;
-
-
   constructor() {
-     this.noteChange = new Observable(observer =>
-      this.observer = observer).share();
      // share() allows multiple subscribers
-
-     this.noteListChange = new Observable(observer =>
-       this.observerNotes = observer).share();
+    this.noteChange = new Observable(observer =>
+      this.observer = observer).share();
    }
 
    ngOnInit() {
      this.selectedNote = NOTES[0];
-     this.changeNote(NOTES[0]);
-
-     this.observerNotes.next(NOTES);
+     this.changeSelectedNote(NOTES[0]);
    }
 
 
@@ -50,13 +40,11 @@ export class NoteService implements OnInit{
     return NOTES;
   }
 
-  changeNote(number) {
+  changeSelectedNote(number) {
      this.selectedNote = number;
      this.observer.next(number);
    }
    getSelectedNote() {
      return this.selectedNote;
    }
-
-
 }

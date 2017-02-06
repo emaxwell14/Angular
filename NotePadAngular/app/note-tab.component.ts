@@ -9,18 +9,16 @@ import { NoteService } from './note.service';
   templateUrl: 'note-tab.component.html',
 })
 export class NoteTabComponent {
-   note: Note;
-
-   onEdit(note: Note): void {
-     // Call edit method in service
-   }
-
+   note:Note
    subscription: any
+   titleEdit: boolean
+
    constructor (private noteService: NoteService) {}
 
    ngOnInit() {
      this.subscription = this.noteService.noteChange.subscribe(
        item => this.selectedNote(item));
+       this.titleEdit = false;
    }
 
    selectedNote(note: Note) {
@@ -31,4 +29,7 @@ export class NoteTabComponent {
     this.subscription.unsubscribe();
   }
 
+  toggleTitleEdit() {
+    this.titleEdit = !this.titleEdit;
+  }
 }

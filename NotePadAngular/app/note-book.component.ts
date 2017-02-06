@@ -10,7 +10,6 @@ import {NoteService} from './note.service'
   templateUrl: 'note-book.component.html'
 })
 export class NoteBookComponent implements OnInit{
-  constructor(){
-  }
+  constructor(){}
   ngOnInit(): void {}
 }

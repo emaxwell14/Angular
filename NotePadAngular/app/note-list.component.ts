@@ -10,12 +10,13 @@ import {NoteService} from './note.service'
   templateUrl: 'note-list.component.html'
 })
 export class NoteListComponent {
-notes: Note[];
-selected: Note;
-subscription: any;
+  notes: Note[];
+
+  selected: Note;
+  selectedSubscription: any
 
   onSelect(note: Note): void {
-    this.noteService.changeNote(note);
+    this.noteService.changeSelectedNote(note);
   }
 
   constructor(private noteService: NoteService) {
@@ -24,9 +25,8 @@ subscription: any;
   ngOnInit() {
     this.selected = this.noteService.getSelectedNote();
     this.notes = this.noteService.getNotes();
-    this.subscription = this.noteService.noteListChange.subscribe(
-      item => this.notes = item);
+    this.selectedSubscription = this.noteService.noteChange.subscribe(
+      item => this.selected = item);
   }
-
 
 }
