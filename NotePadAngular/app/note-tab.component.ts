@@ -6,6 +6,8 @@ import { NoteService } from './note.service';
 /**
 * Component for editing a note. It has twoway binding on the note name and body.
 * It is subscribed to the selected note event.
+*
+* TODO Replace two way binding of Note name. Only save on button click.
 */
 @Component({
   moduleId: module.id,
@@ -25,12 +27,14 @@ export class NoteTabComponent {
    * edit title boolean.
    */
    ngOnInit() {
-     // TODO better way to get default
+     // TODO better way to get default. Last selected?
      this.note = this.noteService.getNotes()[0];
-
-     this.subscription = this.noteService.noteChange.subscribe(
-     item => this.note = item);
+     // TODO this does not clear the title boolean. Need to clear it when list is
+     // selected but dont not is same scope. Tried to put in callback of subscribe
+     // but no luck
      this.titleEdit = false;
+     this.subscription = this.noteService.noteChange.subscribe(
+         item => this.note = item);
    }
 
    ngOnDestroy() {

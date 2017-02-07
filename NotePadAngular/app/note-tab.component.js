@@ -8,11 +8,13 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var core_1 = require('@angular/core');
-var note_service_1 = require('./note.service');
+var core_1 = require("@angular/core");
+var note_service_1 = require("./note.service");
 /**
 * Component for editing a note. It has twoway binding on the note name and body.
 * It is subscribed to the selected note event.
+*
+* TODO Replace two way binding of Note name. Only save on button click.
 */
 var NoteTabComponent = (function () {
     function NoteTabComponent(noteService) {
@@ -24,10 +26,13 @@ var NoteTabComponent = (function () {
     */
     NoteTabComponent.prototype.ngOnInit = function () {
         var _this = this;
-        // TODO better way to get default
+        // TODO better way to get default. Last selected?
         this.note = this.noteService.getNotes()[0];
-        this.subscription = this.noteService.noteChange.subscribe(function (item) { return _this.note = item; });
+        // TODO this does not clear the title boolean. Need to clear it when list is
+        // selected but dont not is same scope. Tried to put in callback of subscribe
+        // but no luck
         this.titleEdit = false;
+        this.subscription = this.noteService.noteChange.subscribe(function (item) { return _this.note = item; });
     };
     NoteTabComponent.prototype.ngOnDestroy = function () {
         this.subscription.unsubscribe();
@@ -39,15 +44,15 @@ var NoteTabComponent = (function () {
     NoteTabComponent.prototype.toggleTitleEdit = function () {
         this.titleEdit = !this.titleEdit;
     };
-    NoteTabComponent = __decorate([
-        core_1.Component({
-            moduleId: module.id,
-            selector: 'note-tab',
-            templateUrl: 'note-tab.component.html',
-        }), 
-        __metadata('design:paramtypes', [note_service_1.NoteService])
-    ], NoteTabComponent);
     return NoteTabComponent;
 }());
+NoteTabComponent = __decorate([
+    core_1.Component({
+        moduleId: module.id,
+        selector: 'note-tab',
+        templateUrl: 'note-tab.component.html',
+    }),
+    __metadata("design:paramtypes", [note_service_1.NoteService])
+], NoteTabComponent);
 exports.NoteTabComponent = NoteTabComponent;
 //# sourceMappingURL=note-tab.component.js.map
